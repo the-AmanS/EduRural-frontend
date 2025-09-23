@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EduRural</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+        }
+        .nav-link.active {
+            background-color: #d1fae5;
+            color: #065f46;
+            font-weight: 600;
+        }
+        /* Hide scrollbar for quiz content */
+        .quiz-content::-webkit-scrollbar {
+            display: none;
+        }
+        .quiz-content {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Notification animation */
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateY(-20px); }
+            10%, 90% { opacity: 1; transform: translateY(0); }
+        }
+        .notification-active {
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-30">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo and Nav Links -->
+                <div class="flex items-center space-x-8">
+                    <div class="flex-shrink-0 flex items-center">
+                         <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        <span class="text-xl font-bold ml-2 text-gray-800">EduRural</span>
+                    </div>
+                    <nav class="hidden md:flex space-x-4">
+                        <a href="#dashboard" class="nav-link active text-gray-500 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors" data-target="dashboard">Dashboard</a>
+                        <a href="#quizzes" class="nav-link text-gray-500 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors" data-target="quizzes">Quizzes</a>
+                        <a href="#leaderboard" class="nav-link text-gray-500 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors" data-target="leaderboard">Leaderboard</a>
+                        <a href="#assignments" class="nav-link text-gray-500 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors" data-target="assignments">Assignments</a>
+                        <a href="#badges" class="nav-link text-gray-500 hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors" data-target="badges">Badges</a>
+                    </nav>
+                </div>
+                <!-- User Profile and Logout -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <span class="ml-2 text-sm font-medium text-gray-700">Alex Johnson</span>
+                        <span class="ml-2 text-xs font-semibold text-yellow-800 bg-yellow-200 px-2 py-0.5 rounded-full">student</span>
+                    </div>
+                    <a href="login.html" title="Logout">
+                        <svg class="w-6 h-6 text-gray-500 hover:text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboard" class="page-content">
+            <h1 class="text-3xl font-bold text-gray-800">Welcome back, Alex Johnson!</h1>
+            <p class="mt-1 text-gray-600">Continue your learning journey and achieve your goals</p>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Points</p>
+                        <p class="text-3xl font-bold text-gray-800">150</p>
+                    </div>
+                    <div class="text-yellow-400">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-12v4m-2-2h4m5 4v4m-2-2h4M17 3h4m-4 5v4m-2-2h4M3 11h4m-4 5v4m-2-2h4m5-12h4m-4 5v4m-2-2h4"></path></svg>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-gray-500">Quizzes Completed</p>
+                        <p class="text-3xl font-bold text-gray-800">12</p>
+                    </div>
+                    <div class="text-green-500">
+                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-gray-500">Assignments Submitted</p>
+                        <p class="text-3xl font-bold text-gray-800">8</p>
+                    </div>
+                    <div class="text-blue-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-gray-500">Badges Earned</p>
+                        <p class="text-3xl font-bold text-gray-800">5</p>
+                    </div>
+                    <div class="text-purple-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+
+             <!-- Quick Actions -->
+            <h2 class="text-2xl font-bold text-gray-800 mt-10">Quick Actions</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+                <!-- Action Cards -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="text-green-600 bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
+                    <h3 class="text-lg font-semibold mt-4 text-gray-800">Take Quiz</h3>
+                    <p class="text-sm text-gray-500 mt-1">Test your knowledge with interactive quizzes</p>
+                    <button data-navtarget="quizzes" class="quick-action-btn mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded-lg transition">Get Started</button>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="text-green-600 bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                    <h3 class="text-lg font-semibold mt-4 text-gray-800">View Assignments</h3>
+                    <p class="text-sm text-gray-500 mt-1">Check your pending assignments</p>
+                    <button data-navtarget="assignments" class="quick-action-btn mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded-lg transition">Get Started</button>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="text-green-600 bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div>
+                    <h3 class="text-lg font-semibold mt-4 text-gray-800">Check Leaderboard</h3>
+                    <p class="text-sm text-gray-500 mt-1">See your ranking and progress</p>
+                    <button data-navtarget="leaderboard" class="quick-action-btn mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded-lg transition">Get Started</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="text-green-600 bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg></div>
+                    <h3 class="text-lg font-semibold mt-4 text-gray-800">My Badges</h3>
+                    <p class="text-sm text-gray-500 mt-1">View your earned achievements</p>
+                    <button data-navtarget="badges" class="quick-action-btn mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded-lg transition">Get Started</button>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <h2 class="text-2xl font-bold text-gray-800 mt-10">Recent Activity</h2>
+            <p class="mt-1 text-gray-600 mb-4">Your latest learning progress</p>
+            <div class="space-y-4">
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center space-x-4">
+                    <div class="text-yellow-500"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-12v4m-2-2h4m5 4v4m-2-2h4M17 3h4m-4 5v4m-2-2h4M3 11h4m-4 5v4m-2-2h4m5-12h4m-4 5v4m-2-2h4"></path></svg></div>
+                    <div>
+                        <p class="font-semibold text-gray-800">Completed Math Quiz #5</p>
+                        <p class="text-sm text-gray-500">Scored 90% - Earned 15 points</p>
+                    </div>
+                </div>
+                 <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center space-x-4">
+                    <div class="text-purple-500"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg></div>
+                    <div>
+                        <p class="font-semibold text-gray-800">Earned "Quick Learner" badge</p>
+                        <p class="text-sm text-gray-500">Completed 3 quizzes in a row</p>
+                    </div>
+                </div>
+                 <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center space-x-4">
+                    <div class="text-blue-500"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                    <div>
+                        <p class="font-semibold text-gray-800">Submitted Science Assignment</p>
+                        <p class="text-sm text-gray-500">Waiting for teacher review</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZZES SECTION -->
+        <section id="quizzes" class="page-content hidden">
+             <h1 class="text-3xl font-bold text-gray-800">Quizzes</h1>
+            <p class="mt-1 text-gray-600">Test your knowledge and earn points</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                 <!-- Quiz Card -->
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex justify-between items-start">
+                        <div class="text-green-600 bg-green-100 p-3 rounded-lg"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
+                        <span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">Easy</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4 text-gray-800">Mathematics Basics</h3>
+                    <p class="text-sm text-gray-500 mt-1">Test your understanding of basic mathematical concepts</p>
+                    <div class="flex space-x-4 text-sm text-gray-500 mt-4">
+                        <span>10 min</span>
+                        <span>&bull;</span>
+                        <span>30 points</span>
+                         <span>&bull;</span>
+                        <span>3 questions</span>
+                    </div>
+                    <button class="start-quiz-btn mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition">Start Quiz</button>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex justify-between items-start">
+                        <div class="text-green-600 bg-green-100 p-3 rounded-lg"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
+                        <span class="text-xs font-semibold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Medium</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4 text-gray-800">Science Fundamentals</h3>
+                    <p class="text-sm text-gray-500 mt-1">Basic concepts in physics, chemistry, and biology</p>
+                    <div class="flex space-x-4 text-sm text-gray-500 mt-4">
+                        <span>8 min</span>
+                        <span>&bull;</span>
+                        <span>25 points</span>
+                         <span>&bull;</span>
+                        <span>2 questions</span>
+                    </div>
+                    <button class="start-quiz-btn mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition">Start Quiz</button>
+                 </div>
+                  <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex justify-between items-start">
+                        <div class="text-green-600 bg-green-100 p-3 rounded-lg"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
+                        <span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">Easy</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4 text-gray-800">English Grammar</h3>
+                    <p class="text-sm text-gray-500 mt-1">Test your knowledge of English grammar rules</p>
+                    <div class="flex space-x-4 text-sm text-gray-500 mt-4">
+                        <span>5 min</span>
+                        <span>&bull;</span>
+                        <span>20 points</span>
+                         <span>&bull;</span>
+                        <span>1 questions</span>
+                    </div>
+                    <button class="start-quiz-btn mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition">Start Quiz</button>
+                 </div>
+            </div>
+        </section>
+
+        <!-- LEADERBOARD SECTION -->
+        <section id="leaderboard" class="page-content hidden">
+            <h1 class="text-3xl font-bold text-gray-800">Leaderboard</h1>
+            <p class="mt-1 text-gray-600">See how you rank against other students</p>
+
+            <div class="mt-6 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800">Your Stats</h2>
+                <p class="text-sm text-gray-500">Your current ranking and progress</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-4">
+                    <div>
+                        <p class="text-4xl font-bold text-green-600">#1</p>
+                        <p class="text-sm text-gray-500">Current Rank</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-bold text-yellow-500">850</p>
+                        <p class="text-sm text-gray-500">Total Points</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-bold text-purple-500">12</p>
+                        <p class="text-sm text-gray-500">Badges Earned</p>
+                    </div>
+                     <div>
+                        <p class="text-4xl font-bold text-blue-500">15</p>
+                        <p class="text-sm text-gray-500">Day Streak</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 text-center" id="leaderboard-top3">
+                <!-- Top 3 students will be inserted here by JS -->
+            </div>
+
+            <div class="mt-8 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800">Full Rankings</h2>
+                <p class="text-sm text-gray-500 mb-4">Complete leaderboard of all students</p>
+                <div class="space-y-3" id="leaderboard-full">
+                    <!-- Full ranking list will be inserted here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ASSIGNMENTS SECTION -->
+        <section id="assignments" class="page-content hidden">
+            <h1 class="text-3xl font-bold text-gray-800">My Assignments</h1>
+            <p class="mt-1 text-gray-600 mb-6">View and submit your assignments</p>
+            <div class="space-y-4">
+                <!-- Assignment Item -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                     <div class="flex flex-col sm:flex-row justify-between items-start">
+                        <div class="flex items-center mb-4 sm:mb-0">
+                            <div class="text-green-600 flex-shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Math Problem Set #3</h3>
+                                <p class="text-sm text-gray-500 mt-1">Solve the quadratic equations and show your work. Include step-by-step solutions for each problem.</p>
+                            </div>
+                        </div>
+                        <div class="text-left sm:text-right flex-shrink-0">
+                             <span class="text-xs font-semibold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Pending</span>
+                             <p class="text-sm text-gray-500 mt-1">25 points</p>
+                        </div>
+                     </div>
+                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4">
+                        <p class="text-sm text-gray-500 mb-2 sm:mb-0">Overdue &bull; <span class="text-red-500">Not submitted</span></p>
+                        <button class="submit-assignment-btn bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition w-full sm:w-auto">Submit Assignment</button>
+                     </div>
+                </div>
+                 <!-- Assignment Item -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                     <div class="flex flex-col sm:flex-row justify-between items-start">
+                        <div class="flex items-center mb-4 sm:mb-0">
+                            <div class="text-green-600 flex-shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Science Lab Report</h3>
+                                <p class="text-sm text-gray-500 mt-1">Write a detailed report on the photosynthesis experiment conducted in class. Include observations, data, and conclusions.</p>
+                            </div>
+                        </div>
+                        <div class="text-left sm:text-right flex-shrink-0">
+                             <span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">Submitted</span>
+                             <p class="text-sm text-gray-500 mt-1">30 points</p>
+                        </div>
+                     </div>
+                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4">
+                        <p class="text-sm text-gray-500 mb-2 sm:mb-0">Overdue &bull; <span class="text-green-500">Submitted</span></p>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition w-full sm:w-auto">View Submission</button>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BADGES SECTION -->
+        <section id="badges" class="page-content hidden">
+             <h1 class="text-3xl font-bold text-gray-800">Badges & Achievements</h1>
+             <p class="mt-1 text-gray-600">Track your progress and recognize achievements</p>
+
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                    <p class="text-4xl font-bold text-yellow-500">3</p>
+                    <p class="text-sm text-gray-500 mt-1">Badges Earned</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                    <p class="text-4xl font-bold text-blue-500">1</p>
+                    <p class="text-sm text-gray-500 mt-1">Peer Recognition</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                    <p class="text-4xl font-bold text-green-500">38%</p>
+                    <p class="text-sm text-gray-500 mt-1">Completion Rate</p>
+                </div>
+             </div>
+
+             <h2 class="text-2xl font-bold text-gray-800 mt-10">Your Badges</h2>
+             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                     <div class="mx-auto bg-yellow-100 text-yellow-500 w-16 h-16 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg></div>
+                     <h3 class="font-semibold mt-4">First Steps</h3>
+                     <p class="text-sm text-gray-500 mt-1">Complete your first quiz</p>
+                     <p class="text-xs text-gray-400 mt-2">Earned 1/10/2024</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                     <div class="mx-auto bg-blue-100 text-blue-500 w-16 h-16 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                     <h3 class="font-semibold mt-4">Quick Learner</h3>
+                     <p class="text-sm text-gray-500 mt-1">Complete 3 quizzes in a row</p>
+                     <p class="text-xs text-gray-400 mt-2">Earned 1/12/2024</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                     <div class="mx-auto bg-red-100 text-red-500 w-16 h-16 rounded-full flex items-center justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
+                     <h3 class="font-semibold mt-4">Helpful Friend</h3>
+                     <p class="text-sm text-gray-500 mt-1">Given by peers for being helpful</p>
+                     <div class="mt-2 inline-flex items-center text-xs text-gray-400">Earned 1/15/2024 <span class="ml-2 font-semibold bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">Peer Award</span></div>
+                 </div>
+             </div>
+
+              <h2 class="text-2xl font-bold text-gray-800 mt-10">Give Recognition to Classmates</h2>
+              <p class="mt-1 text-gray-600">Recognize your classmates for their helpful behavior and good teamwork</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                  <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                      <div class="flex items-center space-x-4">
+                        <div class="bg-red-100 text-red-500 w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
+                        <div>
+                          <h3 class="font-semibold">Helpful Friend</h3>
+                          <p class="text-sm text-gray-500">Given by peers for being helpful</p>
+                        </div>
+                      </div>
+                      <button class="give-badge-btn mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition">Give to Classmate</button>
+                  </div>
+                   <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                      <div class="flex items-center space-x-4">
+                        <div class="bg-blue-100 text-blue-500 w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+                        <div>
+                          <h3 class="font-semibold">Team Player</h3>
+                          <p class="text-sm text-gray-500">Collaborate well with classmates</p>
+                        </div>
+                      </div>
+                      <button class="give-badge-btn mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition">Give to Classmate</button>
+                  </div>
+              </div>
+        </section>
+
+    </main>
+
+    <!-- Success Notification -->
+    <div id="notification" class="fixed top-5 right-5 bg-green-500 text-white py-3 px-5 rounded-lg shadow-lg flex items-center opacity-0 z-50 pointer-events-none">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span id="notification-message"></span>
+    </div>
+
+
+    <!-- Assignment Submission Modal -->
+    <div id="submission-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative">
+            <button class="close-modal-btn absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-xl font-bold text-gray-800">English Essay: Rural Education</h2>
+            <p class="text-sm text-gray-500 mt-1">Write a 500-word essay about the challenges and opportunities in rural education. Include personal experiences if applicable.</p>
+            <form id="assignment-form" class="mt-4 space-y-4">
+                <!-- ... existing form content ... -->
+                <div>
+                    <label for="submission-text" class="block text-sm font-medium text-gray-700 mb-1">Your Submission</label>
+                    <textarea id="submission-text" rows="6" class="w-full border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Enter your assignment submission here..."></textarea>
+                </div>
+                 <div class="flex items-center justify-between p-3 border border-dashed border-gray-300 rounded-md">
+                    <input type="file" id="file-upload" class="hidden">
+                    <label for="file-upload" class="cursor-pointer flex items-center text-sm text-gray-600">
+                        <svg class="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        Choose File
+                    </label>
+                    <span id="file-name" class="text-sm text-gray-500">No file chosen</span>
+                    <button type="button" class="flex items-center text-sm font-medium text-green-600 hover:text-green-800">
+                       <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                       Upload File
+                    </button>
+                </div>
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" class="close-modal-btn bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition">Cancel</button>
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition">Submit Assignment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Give Badge Modal -->
+    <div id="give-badge-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm p-6 relative">
+             <button class="close-modal-btn absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-xl font-bold text-gray-800">Give Team Player Badge</h2>
+            <p class="text-sm text-gray-500 mt-1">Choose a classmate who deserves this recognition</p>
+            <form id="give-badge-form" class="mt-4 space-y-4">
+                <select class="w-full border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500">
+                    <option>Select a classmate</option>
+                    <option>Sarah Chen</option>
+                    <option>Mike Rodriguez</option>
+                    <option>Emma Davis</option>
+                </select>
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button type="button" class="close-modal-btn bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition">Cancel</button>
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition">Give Badge</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl relative flex flex-col" style="height: 90vh; max-height: 500px;">
+             <button class="close-modal-btn absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="p-6 border-b">
+                <h2 id="quiz-title" class="text-xl font-bold text-gray-800">Mathematics Basics</h2>
+                <p id="quiz-progress" class="text-sm text-gray-500 mt-1">Question 1 of 3</p>
+            </div>
+            <div id="quiz-content-area" class="flex-grow p-6 overflow-y-auto quiz-content">
+                <!-- Quiz questions will be loaded here -->
+            </div>
+             <div id="quiz-footer" class="p-4 bg-gray-50 border-t flex justify-between items-center">
+                 <p id="quiz-feedback" class="text-sm font-semibold"></p>
+                <div class="space-x-2">
+                    <button id="check-answer-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg transition">Check Answer</button>
+                    <button id="next-question-btn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition hidden">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- DATA ---
+            const leaderboardData = [
+                { rank: 1, name: 'Alex Johnson', initials: 'AJ', points: 850, badges: 12, streak: 15, me: true },
+                { rank: 2, name: 'Sarah Chen', initials: 'SC', points: 720, badges: 10, streak: 8 },
+                { rank: 3, name: 'Mike Rodriguez', initials: 'MR', points: 680, badges: 9, streak: 12 },
+                { rank: 4, name: 'Emma Davis', initials: 'ED', points: 620, badges: 8, streak: 6 },
+                { rank: 5, name: 'James Wilson', initials: 'JW', points: 580, badges: 7, streak: 10 },
+                { rank: 6, name: 'Lisa Brown', initials: 'LB', points: 540, badges: 6, streak: 5 },
+                { rank: 7, name: 'David Miller', initials: 'DM', points: 500, badges: 5, streak: 7 },
+                { rank: 8, name: 'Anna Garcia', initials: 'AG', points: 480, badges: 4, streak: 4 },
+                { rank: 9, name: 'Tom Anderson', initials: 'TA', points: 450, badges: 3, streak: 3 },
+                { rank: 10, name: 'Maya Patel', initials: 'MP', points: 420, badges: 3, streak: 2 },
+            ];
+
+            const demoQuiz = {
+                title: 'Mathematics Basics',
+                questions: [
+                    {
+                        text: "What is 2 + 2 * 2?",
+                        options: ["4", "6", "8", "2"],
+                        correct: "6"
+                    },
+                    {
+                        text: "What is the square root of 81?",
+                        options: ["7", "8", "9", "10"],
+                        correct: "9"
+                    },
+                    {
+                        text: "What is 15% of 200?",
+                        options: ["15", "20", "30", "40"],
+                        correct: "30"
+                    }
+                ]
+            };
+
+            // --- ELEMENTS ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageContents = document.querySelectorAll('.page-content');
+            
+            // --- MODAL ELEMENTS ---
+            const allModals = document.querySelectorAll('.fixed.inset-0');
+            const submissionModal = document.getElementById('submission-modal');
+            const giveBadgeModal = document.getElementById('give-badge-modal');
+            const quizModal = document.getElementById('quiz-modal');
+            
+            const submitAssignmentBtns = document.querySelectorAll('.submit-assignment-btn');
+            const giveBadgeBtns = document.querySelectorAll('.give-badge-btn');
+            const startQuizBtns = document.querySelectorAll('.start-quiz-btn');
+            const quickActionBtns = document.querySelectorAll('.quick-action-btn');
+
+            // --- NOTIFICATION ELEMENTS ---
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+            
+            // --- FORM ELEMENTS ---
+            const assignmentForm = document.getElementById('assignment-form');
+            const giveBadgeForm = document.getElementById('give-badge-form');
+
+            // --- LEADERBOARD ELEMENTS ---
+            const leaderboardTop3Container = document.getElementById('leaderboard-top3');
+            const leaderboardFullContainer = document.getElementById('leaderboard-full');
+
+            // --- QUIZ ELEMENTS ---
+            let currentQuestionIndex = 0;
+            let score = 0;
+            const quizContentArea = document.getElementById('quiz-content-area');
+            const quizTitle = document.getElementById('quiz-title');
+            const quizProgress = document.getElementById('quiz-progress');
+            const quizFeedback = document.getElementById('quiz-feedback');
+            const checkAnswerBtn = document.getElementById('check-answer-btn');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+
+            // --- FUNCTIONS ---
+            
+            // General Modal Logic
+            function closeModal() {
+                allModals.forEach(modal => modal.classList.add('hidden'));
+            }
+            
+            document.querySelectorAll('.close-modal-btn').forEach(btn => {
+                btn.addEventListener('click', closeModal);
+            });
+
+            allModals.forEach(modal => {
+                 modal.addEventListener('click', function(e) {
+                    if(e.target === modal) {
+                        closeModal();
+                    }
+                });
+            });
+
+            // Notification Logic
+            function showNotification(message) {
+                notificationMessage.textContent = message;
+                notification.classList.remove('opacity-0');
+                notification.classList.add('notification-active');
+                
+                setTimeout(() => {
+                    notification.classList.remove('notification-active');
+                    notification.classList.add('opacity-0');
+                }, 3000);
+            }
+
+            // Tab Switching Logic
+            function navigateToSection(targetId) {
+                const targetLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
+                if (targetLink) {
+                    targetLink.click();
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.dataset.target;
+                    pageContents.forEach(content => content.classList.add('hidden'));
+                    document.getElementById(targetId).classList.remove('hidden');
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    window.scrollTo(0, 0);
+                });
+            });
+
+            // Quick Actions Navigation
+            quickActionBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const targetId = e.currentTarget.dataset.navtarget;
+                    navigateToSection(targetId);
+                });
+            });
+
+            // Assignment Modal
+            submitAssignmentBtns.forEach(btn => {
+                btn.addEventListener('click', () => submissionModal.classList.remove('hidden'));
+            });
+
+            const fileUpload = document.getElementById('file-upload');
+            const fileNameSpan = document.getElementById('file-name');
+            if(fileUpload) {
+                fileUpload.addEventListener('change', function() {
+                    fileNameSpan.textContent = this.files[0] ? this.files[0].name : 'No file chosen';
+                });
+            }
+
+            // Give Badge Modal
+            giveBadgeBtns.forEach(btn => {
+                btn.addEventListener('click', () => giveBadgeModal.classList.remove('hidden'));
+            });
+
+            // Form Submission Handlers
+            assignmentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                closeModal();
+                showNotification('Assignment submitted successfully!');
+            });
+
+            giveBadgeForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                closeModal();
+                showNotification('Badge awarded successfully!');
+            });
+
+
+            // Leaderboard Population
+            function populateLeaderboard() {
+                if(!leaderboardTop3Container || !leaderboardFullContainer) return;
+                leaderboardTop3Container.innerHTML = '';
+                leaderboardFullContainer.innerHTML = '';
+
+                // Top 3
+                const top3 = leaderboardData.slice(0, 3);
+                const trophyColors = ['text-yellow-400', 'text-gray-400', 'text-yellow-600'];
+                top3.forEach((player, index) => {
+                    leaderboardTop3Container.innerHTML += `
+                        <div class="bg-white p-6 rounded-lg shadow-sm border ${player.me ? 'border-yellow-400' : 'border-gray-200'}">
+                            <div class="mx-auto bg-gray-100 text-gray-600 w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold">${player.initials}</div>
+                            <h3 class="font-semibold mt-4 text-lg">${player.name}</h3>
+                            <p class="font-bold text-green-600">${player.points} points</p>
+                            <p class="text-xs text-gray-500 mt-1">${player.badges} badges &bull; ${player.streak} day streak</p>
+                        </div>
+                    `;
+                });
+
+                // Full List
+                leaderboardData.forEach(player => {
+                    leaderboardFullContainer.innerHTML += `
+                        <div class="flex items-center p-3 rounded-lg ${player.me ? 'bg-green-50' : ''}">
+                            <div class="w-8 text-center font-bold text-gray-500">${player.rank === 1 || player.rank === 2 || player.rank === 3 ? '🏆' : '#' + player.rank}</div>
+                            <div class="flex items-center ml-4 flex-grow">
+                                <div class="bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">${player.initials}</div>
+                                <div class="ml-4">
+                                    <p class="font-semibold text-gray-800">${player.name}</p>
+                                    <p class="text-xs text-gray-500">${player.badges} badges &bull; ${player.streak} day streak</p>
+                                </div>
+                            </div>
+                            <div class="font-bold text-green-600">${player.points} <span class="text-sm font-normal text-gray-500">points</span></div>
+                        </div>
+                    `;
+                });
+            }
+            
+            // Quiz Logic
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                loadQuestion();
+                quizModal.classList.remove('hidden');
+            }
+
+            function loadQuestion() {
+                quizFeedback.textContent = '';
+                checkAnswerBtn.classList.remove('hidden');
+                nextQuestionBtn.classList.add('hidden');
+                checkAnswerBtn.disabled = false;
+                
+                if (currentQuestionIndex >= demoQuiz.questions.length) {
+                    showQuizResults();
+                    return;
+                }
+
+                const question = demoQuiz.questions[currentQuestionIndex];
+                quizProgress.textContent = `Question ${currentQuestionIndex + 1} of ${demoQuiz.questions.length}`;
+                let optionsHtml = question.options.map(option => `
+                    <div>
+                        <input type="radio" name="option" value="${option}" id="option-${option}" class="hidden peer">
+                        <label for="option-${option}" class="block cursor-pointer p-4 border border-gray-300 rounded-lg hover:bg-gray-100 peer-checked:bg-blue-100 peer-checked:border-blue-400">${option}</label>
+                    </div>
+                `).join('');
+
+                quizContentArea.innerHTML = `
+                    <p class="text-lg font-semibold mb-4">${question.text}</p>
+                    <div class="space-y-3">${optionsHtml}</div>
+                `;
+            }
+
+            function checkAnswer() {
+                const selectedOption = document.querySelector('input[name="option"]:checked');
+                if (!selectedOption) {
+                    quizFeedback.textContent = 'Please select an answer!';
+                    quizFeedback.className = 'text-sm font-semibold text-red-500';
+                    return;
+                }
+
+                const answer = selectedOption.value;
+                const correctAnswer = demoQuiz.questions[currentQuestionIndex].correct;
+
+                document.querySelectorAll('input[name="option"]').forEach(input => input.disabled = true);
+
+                if (answer === correctAnswer) {
+                    score++;
+                    quizFeedback.textContent = 'Correct!';
+                    quizFeedback.className = 'text-sm font-semibold text-green-500';
+                    selectedOption.parentElement.querySelector('label').classList.add('bg-green-100', 'border-green-400');
+                } else {
+                    quizFeedback.textContent = `Wrong! Correct answer: ${correctAnswer}`;
+                    quizFeedback.className = 'text-sm font-semibold text-red-500';
+                    selectedOption.parentElement.querySelector('label').classList.add('bg-red-100', 'border-red-400');
+                }
+
+                checkAnswerBtn.classList.add('hidden');
+                nextQuestionBtn.classList.remove('hidden');
+                currentQuestionIndex++;
+            }
+            
+            function showQuizResults() {
+                quizContentArea.innerHTML = `
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold">Quiz Complete!</h3>
+                        <p class="mt-2 text-lg">You scored ${score} out of ${demoQuiz.questions.length}</p>
+                    </div>
+                `;
+                quizProgress.textContent = 'Results';
+                quizFeedback.textContent = '';
+                checkAnswerBtn.classList.add('hidden');
+                nextQuestionBtn.textContent = 'Close';
+                nextQuestionBtn.onclick = closeModal;
+                nextQuestionBtn.classList.remove('hidden');
+            }
+
+
+            // --- EVENT LISTENERS ---
+            startQuizBtns.forEach(btn => btn.addEventListener('click', startQuiz));
+            checkAnswerBtn.addEventListener('click', checkAnswer);
+            nextQuestionBtn.addEventListener('click', () => {
+                nextQuestionBtn.textContent = 'Next';
+                nextQuestionBtn.onclick = null;
+                loadQuestion();
+            });
+
+            // --- INITIALIZATION ---
+            populateLeaderboard();
+
+        });
+    </script>
+</body>
+</html>
+
